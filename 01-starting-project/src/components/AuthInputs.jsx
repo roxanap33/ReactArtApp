@@ -1,14 +1,6 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { Button } from "./Button";
+import Button from "./Button";
 import CustomInput from "./Input";
-
-const ControlContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-`;
 
 export default function AuthInputs() {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -31,12 +23,15 @@ export default function AuthInputs() {
   const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
   return (
-    <div id="auth-inputs">
-      <ControlContainer>
+    <div
+      id="auth-inputs"
+      className="w-full max-w-sm p-8 mx-auto rounded shadow-md bg-gradient-to-b from-stone-700 to-stone-800"
+    >
+      <div className="flex flex-col gap-2 mb-6">
         <p className="paragraph">
           <CustomInput
             label="E-mail"
-            $invalid={emailNotValid} //dollar sign to show that this prop is used only for styling
+            invalid={emailNotValid} //dollar sign to show that this prop is used only for styling
             type="email"
             // style={{
             //   backgroundColor: emailNotValid ? "#f73f3f" : "#d1d5db",
@@ -47,7 +42,7 @@ export default function AuthInputs() {
         <p>
           <CustomInput
             label="Password"
-            $invalid={passwordNotValid}
+            invalid={passwordNotValid}
             type="password"
             //className={passwordNotValid ? "invalid" : undefined}
             onChange={(event) =>
@@ -55,14 +50,12 @@ export default function AuthInputs() {
             }
           />
         </p>
-      </ControlContainer>
-      <div className="actions">
-        <button type="button" className="text-button">
+      </div>
+      <div className="flex jus gap-4">
+        <button type="button" className="text-amber-400 hover:text-amber-500">
           Create a new account
         </button>
-        <Button className="button" onClick={handleLogin}>
-          Sign In
-        </Button>
+        <Button onClick={handleLogin}>Sign In</Button>
       </div>
     </div>
   );
